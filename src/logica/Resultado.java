@@ -1,5 +1,6 @@
 package logica;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,12 +28,24 @@ public class Resultado {
         this.puntosJugadores = puntosJugadores;
     }
 
+    public static int sumarPuntos(ArrayList<Carta> mazo){
+        int puntos = 0;
+        for (int i = 0; i < mazo.size(); i++) {
+            switch (mazo.get(i).getTipoCarta()) {
+                case COLOR -> puntos+=mazo.get(i).getNumero();
+                case CAMBIO_SENTIDO, MAS_DOS, SALTAR_TURNO -> puntos+=20;
+                default -> puntos+=50;
+            }
+        }
+        return puntos;
+    }
+
     /*
      * Este método es para dar el resultado de todas las partidas juntas
      */
     public static Resultado calcularResultadoFinal(int numeroJugadores, int numeroPartidas){
         Resultado resultadoFinal = new Resultado(numeroJugadores);//Resultado que retornaremos
-        Resultado resultado;//Resultado de las partidas que vayamos generando
+        Resultado resultado;//Resultado individual de una sola partida
 
         //Por cada una de las partidas sumaremos los puntos al resultado final
         for(int i = 0; i < numeroPartidas; i++){

@@ -9,7 +9,7 @@ public class Menu {
     
     public static void InicioPrograma(){
         
-         System.out.println("\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n");
         System.out.println("--------------------------------------");
         System.out.println("BIENVENIDO AL CALCULADOR DE ESTRATEGIAS DE UNO");
         System.out.println("--------------------------------------");
@@ -21,7 +21,7 @@ public class Menu {
         int numeroJugadores = Utility.ObtenerNumeroAmbosIncluidos(2,6);
         
         //Obtener el numero de partidas
-        System.out.println("\nFinalmente debemos indicar cuantas partidas queremos que calcule el sistema(1-1.000):");
+        System.out.println("\nFinalmente debemos indicar cuántas partidas queremos que calcule el sistema(1-1.000):");
         int numeroPartidas = Utility.ObtenerNumeroAmbosIncluidos(1,1_000);
         
         //Obtener resultados de las partidas
@@ -38,7 +38,5 @@ public class Menu {
             if(ganadores[i])
                 System.out.println("El ganador es el jugador número " + (i+1) + " con un total de: " + resultadoFinal.getPuntosUnJugador(i) + " puntos.");
         }
-        
-
     }
 }

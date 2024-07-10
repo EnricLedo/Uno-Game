@@ -8,10 +8,10 @@ import java.util.ArrayList;
 */
 public class Carta {
     
-    private Integer cartaId;
-    private TipoCarta tipoCarta;
+    private final Integer cartaId;
+    private final TipoCarta tipoCarta;
     private Color color;
-    private int numero;
+    private final int numero;
     
     public Carta(Integer cartaId, TipoCarta tipoCarta, Color color, int numero) {
         this.cartaId = cartaId;
@@ -35,6 +35,55 @@ public class Carta {
     public int getNumero() {
         return numero;
     }
+    //Este setter debemos usarlo para cambiar el color NEGRO,
+    //de este modo informamos sobre el color al que decidimos cambiar
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public enum TipoCarta {
+        COLOR,
+        CAMBIO_SENTIDO,
+        SALTAR_TURNO,
+        MAS_DOS,
+        MAS_CUATRO,
+        CAMBIO_COLOR
+    }
+    
+    public enum Color {
+        ROJO,
+        AZUL,
+        VERDE,
+        AMARILLO,
+        NEGRO
+    }
+
+    @Override
+    public String toString() {
+        switch (tipoCarta) {
+            case COLOR -> {
+                return numero + " " + color;
+            }
+            case SALTAR_TURNO, CAMBIO_SENTIDO, MAS_DOS -> {    
+                return tipoCarta + " " + color;
+            }
+            case MAS_CUATRO, CAMBIO_COLOR -> {
+                if(color.equals(Color.NEGRO))
+                    return tipoCarta + "";
+                else
+                    return tipoCarta + " " + color;
+            }
+            default -> {
+                return "Carta{" +
+                        "cartaId=" + cartaId +
+                        ", tipoCarta=" + tipoCarta +
+                        ", color=" + color +
+                        ", numero=" + numero +
+                        '}';
+            }
+        }
+    }
+
 
     public static ArrayList<Carta> mazoProvider(){
         ArrayList<Carta> mazo = new ArrayList<>();
@@ -146,34 +195,18 @@ public class Carta {
         mazo.add(new Carta(99, TipoCarta.SALTAR_TURNO, Color.AMARILLO, -1));
         mazo.add(new Carta(100, TipoCarta.SALTAR_TURNO, Color.AMARILLO, -1));
 
-        mazo.add(new Carta(101, TipoCarta.MAS_CUATRO, null, -1));
-        mazo.add(new Carta(102, TipoCarta.MAS_CUATRO, null, -1));
-        mazo.add(new Carta(103, TipoCarta.MAS_CUATRO, null, -1));
-        mazo.add(new Carta(104, TipoCarta.MAS_CUATRO, null, -1));
+        mazo.add(new Carta(101, TipoCarta.MAS_CUATRO, Color.NEGRO, -1));
+        mazo.add(new Carta(102, TipoCarta.MAS_CUATRO, Color.NEGRO, -1));
+        mazo.add(new Carta(103, TipoCarta.MAS_CUATRO, Color.NEGRO, -1));
+        mazo.add(new Carta(104, TipoCarta.MAS_CUATRO, Color.NEGRO, -1));
 
-        mazo.add(new Carta(105, TipoCarta.CAMBIO_COLOR, null, -1));
-        mazo.add(new Carta(106, TipoCarta.CAMBIO_COLOR, null, -1));
-        mazo.add(new Carta(107, TipoCarta.CAMBIO_COLOR, null, -1));
-        mazo.add(new Carta(108, TipoCarta.CAMBIO_COLOR, null, -1));
+        mazo.add(new Carta(105, TipoCarta.CAMBIO_COLOR, Color.NEGRO, -1));
+        mazo.add(new Carta(106, TipoCarta.CAMBIO_COLOR, Color.NEGRO, -1));
+        mazo.add(new Carta(107, TipoCarta.CAMBIO_COLOR, Color.NEGRO, -1));
+        mazo.add(new Carta(108, TipoCarta.CAMBIO_COLOR, Color.NEGRO, -1));
 
         return mazo;
     }
-}
-
-enum TipoCarta {
-    COLOR,
-    CAMBIO_SENTIDO,
-    SALTAR_TURNO,
-    MAS_DOS,
-    MAS_CUATRO,
-    CAMBIO_COLOR
-}
-
-enum Color {
-    ROJO,
-    AZUL,
-    VERDE,
-    AMARILLO
 }
 
 
